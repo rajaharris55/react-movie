@@ -26,9 +26,14 @@ function App() {
   }, [searchValue]);
 
   useEffect(() => {
-    const savedFavorites = JSON.parse(localStorage.getItem("movies"));
+    const savedFavorites = localStorage.getItem("movies");
     if (savedFavorites) {
-      setFavorites(savedFavorites);
+      try {
+        setFavorites(JSON.parse(savedFavorites));
+      } catch (error) {
+        console.error("Error parsing saved favorites:", error);
+        setFavorites([]);
+      }
     }
   }, []);
 
@@ -47,7 +52,7 @@ function App() {
       (fav) => fav.imdbID !== movie.imdbID
     );
     setFavorites(updatedFavorites);
-    saveToStorage(newFavorites);
+    saveToStorage(JSON.stringify(updatedFavorites));
   };
 
   return (
