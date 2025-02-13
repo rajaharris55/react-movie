@@ -1,11 +1,11 @@
-import MovieList from "../components/homepage/MovieList";
+import MovieList from "./components/homepage/MovieList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { useEffect, useState } from "react";
-import MovieListHeading from "../components/Heading/MovieListHeading";
-import SearchBox from "../components/SearchBox";
-import AddFavorites from "../components/AddFavorites";
-import removeFavorites from "../components/removeFavorites";
+import MovieListHeading from "./components/Heading/MovieListHeading";
+import SearchBox from "./components/SearchBox";
+import AddFavorites from "./components/AddFavorites";
+import removeFavorites from "./components/removeFavorites";
 
 const Homepage = () => {
     const [movies, setMovies] = useState([]);
