@@ -5,11 +5,14 @@ const MovieList = (props) => {
   return (
     <>
       {props.movies.map((movies, index) => (
-        <div className="image-container d-flex justify-content-start m-3 position-relative" key={index}>
+        <div
+          className="image-container d-flex justify-content-start m-3 position-relative"
+          key={index}
+        >
           <div className="movie-list">
-            <img 
-              src={movies.Poster} 
-              alt="movie" 
+            <img
+              src={movies.Poster}
+              alt="movie"
               className="rounded shadow-sm"
               style={{ maxHeight: "300px", objectFit: "cover" }}
             />
@@ -25,8 +28,8 @@ const MovieList = (props) => {
               top: 0,
               left: 0,
             }}
-            onMouseEnter={(e) => e.currentTarget.style.opacity = "1"}
-            onMouseLeave={(e) => e.currentTarget.style.opacity = "0"}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0")}
           >
             <FavComponent />
           </div>
@@ -36,4 +39,4 @@ const MovieList = (props) => {
   );
 };
 
-export default MovieList; 
+export default MovieList;
