@@ -1,15 +1,31 @@
 import { useState } from "react";
 import { Container, Form, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem("user", JSON.stringify({ email }));
-    navigate("/");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+
+      localStorage.setItem("token", response.data.token);
+      navigate("/Homepage");
+    } catch (error) {
+      console.log("Error logging in:", error);
+    }
   };
 
   return (

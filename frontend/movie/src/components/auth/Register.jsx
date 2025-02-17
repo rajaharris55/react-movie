@@ -1,20 +1,41 @@
 import { useState } from "react";
 import { Container, Form, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       alert("Passwords don't match!");
       return;
     }
-    localStorage.setItem("user", JSON.stringify({ email }));
-    navigate("/");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/register",
+        {
+          email,
+          password,
+        }
+      );
+
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        navigate("/Homepage");
+      } else {
+        alert("Registration failed");
+      }
+    } catch (error) {
+      console.error("Error registering:", error.response?.data || error);
+      alert("Error registering. Try again.");
+    }
   };
 
   return (
