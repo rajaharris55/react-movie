@@ -21,7 +21,7 @@ const AuthLinks = () => {
         </>
       ) : (
         <>
-          <Link to="/login">
+          <Link to="/">
             <Button variant="outline-primary" size="sm">
               Login
             </Button>
